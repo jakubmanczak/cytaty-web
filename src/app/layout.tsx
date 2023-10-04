@@ -18,7 +18,7 @@ export default function RootLayout({
     <html>
       <body
         className={`
-          min-h-screen bg-gradient-to-r from-slate-50 to-slate-100
+          min-h-screen bg-gradient-to-r from-slate-100 to-slate-200
           `}
         // ${lora.className}
       >
