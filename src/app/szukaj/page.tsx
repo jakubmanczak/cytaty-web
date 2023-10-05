@@ -1,19 +1,22 @@
 "use client";
 import { Navigation } from "@/components/Navigation";
+import { Quote } from "@/components/Quote";
 import { useState } from "react";
 import Image from "next/image";
 
 const exampleDataSet = [
   {
     quoteid: "01HBY5X0KZV4AQWXA7XFX84Y3A",
-    context: "data 8 marca na socrealistycznym plakacie z PRL-u",
-    timestamp: 0,
+    context: "data na plakacie z PRL-u",
+    timestamp: 1696324197,
     lines: [
       {
+        lineid: "asdasdfasdfa",
         content: "8 marca? W sumie nie wiem co to za data...",
         author: "Mateusz Dobrzyński",
       },
       {
+        lineid: "ehtdngw5yresgdf",
         content:
           "Dzień kobiet... ale podobno w ZSK macie prawo tego nie wiedzieć.",
         author: "Sławomir Wartacz",
@@ -22,10 +25,11 @@ const exampleDataSet = [
   },
   {
     quoteid: "01HBY66QS7VP7SY0RK5A0K52B4",
-    context: "do Kacpra Włosińskiego na temat jego tatuażu",
-    timestamp: 0,
+    context: "o tatuażu Kacpra Włosińskiego",
+    timestamp: 1696412277,
     lines: [
       {
+        lineid: "6uhdfxfgwe",
         content: "A ty znowu jak brudnopis wyglądasz.",
         author: "Alicja Gizelska",
       },
@@ -34,13 +38,15 @@ const exampleDataSet = [
   {
     quoteid: "01HBY8EXFV0T62N2EB8X7975TD",
     context: null,
-    timestamp: 0,
+    timestamp: 1695282767,
     lines: [
       {
+        lineid: "asfgafgsdfg",
         content: "Franek bez bolca dostaje pierdolca.",
         author: "Aleksander Skubała",
       },
       {
+        lineid: "dsfgheuyhdgdgf",
         content: "Jak się Olka nie bije to mu wątroba gnije.",
         author: "Franciszek Niemczewski",
       },
@@ -49,9 +55,10 @@ const exampleDataSet = [
   {
     quoteid: "01HBY8QBWTBPC6FN5DJ0JG8AXT",
     context: null,
-    timestamp: 0,
+    timestamp: 1695200627,
     lines: [
       {
+        lineid: "sdfgsdfgsdfg",
         content: "A gdzie tu jest sex?",
         author: "Ryszard Pyssa",
       },
@@ -122,38 +129,17 @@ export default function Search() {
           )}
           {/*  */}
           <div className="flex flex-col gap-4 mt-2">
-            {!searchQuery
+            {resolvedData
               ? resolvedData.map((quote) => {
                   return (
-                    <article
-                      key={quote.quoteid}
-                      className="w-full bg-white rounded-lg shadow"
-                    >
-                      <div className="p-4">
-                        {quote.lines.map((line) => {
-                          return (
-                            <p key={line.content}>
-                              <span>{line.content}</span>
-                              <span className="text-slate-400">
-                                {" ~ "}
-                                {line.author}
-                              </span>
-                            </p>
-                          );
-                        })}
-                      </div>
-                      <hr className="border-slate-300" />
-                      <div className="flex flex-row justify-between bg-slate-100 rounded-bl-lg rounded-br-lg px-4 py-2">
-                        <p className="text-slate-400">
-                          {"("}
-                          {quote.context || "brak kontekstu"}
-                          {")"}
-                        </p>
-                        <p className="text-slate-400">
-                          {new Date(quote.timestamp).toUTCString()}
-                        </p>
-                      </div>
-                    </article>
+                    <Quote
+                      quote={{
+                        quoteid: quote.quoteid,
+                        context: quote.context,
+                        timestamp: quote.timestamp,
+                        lines: quote.lines,
+                      }}
+                    />
                   );
                 })
               : ""}
