@@ -10,8 +10,9 @@ type quoteType = {
 };
 
 const Quote = (props: { quote: quoteType }) => {
+  let datetime = new Date(props.quote.timestamp * 1000);
   return (
-    <article className="w-full bg-white rounded-lg shadow">
+    <article className="w-full bg-white rounded shadow">
       <div className="p-4">
         {props.quote.lines.map((line) => {
           return (
@@ -21,8 +22,8 @@ const Quote = (props: { quote: quoteType }) => {
                 {line.content}
                 {/* {"”"} */}
               </span>
-              <span className="">
-                {"~"}
+              <span className="text-slate-400">
+                {" ~ "}
                 {line.author}
               </span>
             </p>
@@ -37,7 +38,19 @@ const Quote = (props: { quote: quoteType }) => {
           {")"}
         </p>
         <p className="text-slate-400">
-          {new Date(props.quote.timestamp * 1000).toUTCString()}
+          {datetime.getDate() + 1 < 10 ? "0" : ""}
+          {datetime.getDate()}
+          {"/"}
+          {datetime.getMonth() + 1 < 10 ? "0" : ""}
+          {datetime.getMonth() + 1}
+          {"/"}
+          {datetime.getFullYear()}
+          {" @ "}
+          {datetime.getHours() < 10 ? "0" : ""}
+          {datetime.getHours()}
+          {":"}
+          {datetime.getMinutes() < 10 ? "0" : ""}
+          {datetime.getMinutes()}
         </p>
       </div>
     </article>

@@ -80,7 +80,7 @@ export default function Search() {
             <input
               type="text"
               placeholder={`Szukaj w cytatach, kontekstach lub autorach...`}
-              className="w-full p-3 rounded-lg rounded-tr-none rounded-br-none"
+              className="w-full p-3 rounded rounded-tr-none rounded-br-none"
               value={searchQuery}
               onChange={(event) => {
                 setSearchQuery(event.target.value);
@@ -90,7 +90,7 @@ export default function Search() {
               className="
               flex justify-center items-center w-12
               bg-gradient-to-t from-violet-700 to-blue-600
-              rounded-lg rounded-tl-none rounded-bl-none drop-shadow
+              rounded rounded-tl-none rounded-bl-none drop-shadow
             "
             >
               <Image
