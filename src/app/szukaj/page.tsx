@@ -2,7 +2,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Quote } from "@/components/Quote";
 import { useState } from "react";
-import Image from "next/image";
+import { IconSearch } from "@/icons/Search";
 
 const exampleDataSet = [
   {
@@ -88,17 +88,13 @@ export default function Search() {
             />
             <button
               className="
-              flex justify-center items-center w-12
+              flex justify-center items-center w-12 text-slate-50
               bg-gradient-to-t from-violet-700 to-blue-600
+              hover:from-violet-800 hover:to-blue-700
               rounded rounded-tl-none rounded-bl-none drop-shadow
             "
             >
-              <Image
-                src="/search-white.svg"
-                alt="ikona szukania reprezentująca przycisk do zatwierdzenia wyszukania"
-                width={24}
-                height={24}
-              />
+              <IconSearch />
             </button>
           </div>
           {/* <div className="w-full flex flex-row">

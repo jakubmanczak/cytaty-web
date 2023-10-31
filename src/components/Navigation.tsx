@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import { IconSearch } from "@/icons/Search";
+import { IconUser } from "@/icons/User";
 
 const Navigation = () => {
   const iconsize: number = 24;
@@ -22,26 +24,25 @@ const Navigation = () => {
         href="/szukaj"
         className="px-6 flex flex-row items-center gap-2 justify-center hover:bg-slate-200"
       >
-        <Image
-          src="/search.svg"
-          alt="ikona reprezentatywna wyszukiwania"
-          width={iconsize}
-          height={iconsize}
-        />
+        <IconSearch />
         <p className="hidden lg:block">Wyszukiwanie szczegółowe</p>
       </Link>
       <Link
+        href="/zaloguj-sie"
+        className="
+          px-6 flex flex-row items-center gap-2 justify-center hover:bg-slate-200
+        "
+      >
+        <IconUser />
+        <p className="hidden lg:block">Zaloguj się</p>
+      </Link>
+      {/* <Link
         href="/panel-edytorski"
         className="px-6 flex flex-row items-center gap-2 justify-center hover:bg-slate-200"
       >
-        <Image
-          src="/layout.svg"
-          alt="ikona reprezentatywna panelu edytorskiego"
-          width={iconsize}
-          height={iconsize}
-        />
+        <IconLayout />
         <p className="hidden lg:block">Panel edytorski</p>
-      </Link>
+      </Link> */}
     </nav>
   );
 };

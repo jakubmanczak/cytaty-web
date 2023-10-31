@@ -33,17 +33,17 @@ export default function Home() {
           {
             head: "2137",
             body: "cytatów w bazie",
-            class: "min-w-[25%] flex-1",
+            class: "min-w-[30%] flex-1",
           },
           {
             head: "∞",
             body: "przekleństw, wyzwisk i obelg",
-            class: "min-w-[25%] flex-1",
+            class: "min-w-[30%] flex-1",
           },
           {
             head: "1521",
             body: "dni w tym pierdolniku",
-            class: "min-w-[25%] flex-1",
+            class: "min-w-[30%] flex-1",
           },
           {
             head: "ndst.",
@@ -66,6 +66,40 @@ export default function Home() {
             </div>
           );
         })}
+      </div>
+      <hr className="max-w-4xl mx-auto border-slate-300 my-8" />
+      <div className="max-w-4xl mx-auto py-4 flex flex-row justify-between">
+        <div className="flex flex-col flex-1 px-4 text-center">
+          <h3 className="font-bold text-2xl">Dodaj cytat</h3>
+          <p className="text-slate-500">
+            Z czego się tak śmiejesz? Powiedz. <br /> Wszyscy się pośmiejemy.
+          </p>
+          <button
+            className="
+                p-2 rounded text-white shadow mt-6 outline-black
+                bg-violet-500 bg-gradient-to-r from-violet-700 to-blue-600
+                hover:from-violet-800 hover:to-blue-700
+                "
+          >
+            Przejdź do dodawania cytatów.
+          </button>
+        </div>
+        <div className="w-px bg-slate-300" />
+        <div className="flex flex-col flex-1 px-4 text-center">
+          <h3 className="font-bold text-2xl">Szukaj cytatu</h3>
+          <p className="text-slate-500">
+            Nie pamiętasz *jak* pan Jezus powiedział? <br /> To patrz teraz.
+          </p>
+          <button
+            className="
+                p-2 rounded text-white shadow mt-6 outline-black
+                bg-violet-500 bg-gradient-to-r from-violet-700 to-blue-600
+                hover:from-violet-800 hover:to-blue-700
+                "
+          >
+            Przejdź do szukania cytatów.
+          </button>
+        </div>
       </div>
     </>
   );
