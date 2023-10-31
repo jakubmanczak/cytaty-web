@@ -135,6 +135,7 @@ export default function Search() {
                         timestamp: quote.timestamp,
                         lines: quote.lines,
                       }}
+                      key={quote.quoteid}
                     />
                   );
                 })
