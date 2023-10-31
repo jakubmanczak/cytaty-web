@@ -22,7 +22,7 @@ const Quote = (props: { quote: quoteType }) => {
                 {line.content}
                 {/* {"”"} */}
               </span>
-              <span className="text-slate-400">
+              <span className="text-slate-400 pl-3">
                 {" ~ "}
                 {line.author}
               </span>
