@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { Quote } from "@/components/Quote";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -74,15 +75,21 @@ export default function Home() {
           <p className="text-slate-500">
             Z czego się tak śmiejesz? Powiedz. <br /> Wszyscy się pośmiejemy.
           </p>
-          <button
-            className="
-                p-2 rounded text-white shadow mt-6 outline-black
+          <Link
+            href="/"
+            className="mt-6 flex rounded outline-black outline-offset-4"
+          >
+            <button
+              className="
+                p-2 rounded flex-1 text-white shadow
                 bg-violet-500 bg-gradient-to-r from-violet-700 to-blue-600
                 hover:from-violet-800 hover:to-blue-700
                 "
-          >
-            Przejdź do dodawania cytatów.
-          </button>
+              tabIndex={-1}
+            >
+              Przejdź do dodawania cytatów.
+            </button>
+          </Link>
         </div>
         <div className="w-px bg-slate-300" />
         <div className="flex flex-col flex-1 px-4 text-center">
@@ -90,15 +97,21 @@ export default function Home() {
           <p className="text-slate-500">
             Nie pamiętasz *jak* pan Jezus powiedział? <br /> To patrz teraz.
           </p>
-          <button
-            className="
-                p-2 rounded text-white shadow mt-6 outline-black
+          <Link
+            href="/szukaj"
+            className="mt-6 flex rounded outline-black outline-offset-4"
+          >
+            <button
+              className="
+                p-2 rounded flex-1 text-white shadow
                 bg-violet-500 bg-gradient-to-r from-violet-700 to-blue-600
                 hover:from-violet-800 hover:to-blue-700
                 "
-          >
-            Przejdź do szukania cytatów.
-          </button>
+              tabIndex={-1}
+            >
+              Przejdź do szukania cytatów.
+            </button>
+          </Link>
         </div>
       </div>
     </>
