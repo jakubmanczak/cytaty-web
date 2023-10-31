@@ -49,10 +49,12 @@ export default function Home() {
           {
             head: "ndst.",
             body: "ocena Jakuba Kleki z matematyki",
+            class: "min-w-[30%] flex-1",
           },
           {
             head: "204% ↘",
             body: "spadek akcji spółki CD Projekt wg. Rabendy",
+            class: "min-w-[30%] flex-1",
           },
         ].map((el) => {
           return (

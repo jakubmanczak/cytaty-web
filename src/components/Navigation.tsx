@@ -1,10 +1,19 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { IconSearch } from "@/icons/Search";
 import { IconUser } from "@/icons/User";
+import { useState } from "react";
+import { IconChevronDown } from "@/icons/ChevronDown";
+import { IconLayout } from "@/icons/Layout";
+import { IconLogOut } from "@/icons/LogOut";
+import { IconSliders } from "@/icons/Sliders";
+import { IconChevronUp } from "@/icons/ChevronUp";
 
 const Navigation = () => {
   const iconsize: number = 24;
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [userPanelOpen, setUserPanelOpen] = useState<boolean>(false);
   return (
     <nav className="flex flex-row shadow-md bg-slate-50">
       <Link href="/" className="flex flex-row px-4 mr-auto hover:bg-slate-200">
@@ -22,27 +31,77 @@ const Navigation = () => {
       </Link>
       <Link
         href="/szukaj"
-        className="px-6 flex flex-row items-center gap-2 justify-center hover:bg-slate-200"
+        className="px-6 flex flex-row items-center gap-2 justify-center border-slate-200 border-l hover:bg-slate-200"
       >
         <IconSearch />
         <p className="hidden lg:block">Wyszukiwanie szczegółowe</p>
       </Link>
-      <Link
-        href="/zaloguj-sie"
-        className="
-          px-6 flex flex-row items-center gap-2 justify-center hover:bg-slate-200
-        "
-      >
-        <IconUser />
-        <p className="hidden lg:block">Zaloguj się</p>
-      </Link>
-      {/* <Link
-        href="/panel-edytorski"
-        className="px-6 flex flex-row items-center gap-2 justify-center hover:bg-slate-200"
-      >
-        <IconLayout />
-        <p className="hidden lg:block">Panel edytorski</p>
-      </Link> */}
+      {loggedIn ? (
+        <>
+          <div className="relative">
+            <button
+              className="pl-3 pr-10 h-full flex flex-row items-center min-w-[220px] gap-2 justify-left border-slate-200 border-l hover:bg-slate-200"
+              onClick={() => {
+                setUserPanelOpen(!userPanelOpen);
+              }}
+            >
+              <div className="text-slate-500">
+                {userPanelOpen ? <IconChevronUp /> : <IconChevronDown />}
+              </div>
+              <div className="flex flex-row justify-center items-center text-slate-50 rounded-full bg-violet-600 bg-gradient-to-tr from-violet-700 to-blue-600 w-8 h-8">
+                <IconUser />
+              </div>
+              {/* USERNAME */}
+              <p className="font-semibold">username</p>
+            </button>
+            {userPanelOpen ? (
+              <div className="absolute right-0 shadow-md w-full bg-slate-50">
+                <Link
+                  href="/panel-edytorski"
+                  className="flex flex-row items-center w-full py-3 pl-6 gap-6 border-slate-200 border-t hover:bg-slate-200"
+                >
+                  <IconLayout />
+                  <p>Panel edytorski</p>
+                </Link>
+                <Link
+                  href="/ustawienia-konta"
+                  className="flex flex-row items-center w-full py-3 pl-6 gap-6 border-slate-200 border-t hover:bg-slate-200"
+                >
+                  <IconSliders />
+                  <p>Ustawienia konta</p>
+                </Link>
+                <button
+                  className="flex flex-row items-center w-full py-3 pl-6 gap-6 border-slate-200 border-t hover:bg-slate-200"
+                  onClick={() => {
+                    setLoggedIn(false);
+                    setUserPanelOpen(false);
+                  }}
+                >
+                  <IconLogOut />
+                  <p>Wyloguj się</p>
+                </button>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <button
+            // href="/zaloguj-sie"
+            onClick={() => {
+              setLoggedIn(true);
+            }}
+            className="
+              px-6 flex flex-row items-center gap-2 justify-center border-slate-200 border-l hover:bg-slate-200
+            "
+          >
+            <IconUser />
+            <p className="hidden lg:block">Zaloguj się</p>
+          </button>
+        </>
+      )}
     </nav>
   );
 };
