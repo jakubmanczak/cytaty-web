@@ -12,7 +12,7 @@ type quoteType = {
 const Quote = (props: { quote: quoteType }) => {
   let datetime = new Date(props.quote.timestamp * 1000);
   return (
-    <article className="w-full bg-white rounded shadow">
+    <article className="w-full bg-white md:rounded shadow">
       <div className="p-4">
         {props.quote.lines.map((line) => {
           return (

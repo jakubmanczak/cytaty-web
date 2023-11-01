@@ -29,39 +29,32 @@ export default function Home() {
         />
       </div>
       <h2 className="max-w-4xl mx-auto font-bold text-xl py-2">Statystyki</h2>
-      <div className="max-w-4xl mx-auto py-4 flex flex-row flex-wrap gap-4">
+      <div className="max-w-4xl mx-auto py-4 flex flex-col md:flex-row flex-wrap gap-4">
         {[
           {
             head: "2137",
             body: "cytatów w bazie",
-            class: "min-w-[30%] flex-1",
           },
           {
             head: "∞",
             body: "przekleństw, wyzwisk i obelg",
-            class: "min-w-[30%] flex-1",
           },
           {
             head: "1521",
             body: "dni w tym pierdolniku",
-            class: "min-w-[30%] flex-1",
           },
           {
             head: "ndst.",
             body: "ocena Jakuba Kleki z matematyki",
-            class: "min-w-[30%] flex-1",
           },
           {
             head: "204% ↘",
             body: "spadek akcji spółki CD Projekt wg. Rabendy",
-            class: "min-w-[30%] flex-1",
           },
         ].map((el) => {
           return (
             <div
-              className={`bg-slate-50 p-4 text-center rounded shadow min-w-max ${
-                el.class ? el.class : "flex-1"
-              }`}
+              className="bg-slate-50 p-4 text-center md:rounded shadow flex-1 min-w-[30%]"
               key={el.body}
             >
               <p className="font-extrabold text-4xl">{el.head}</p>
