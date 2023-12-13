@@ -3,6 +3,7 @@ import { Quote } from "@/components/Quote";
 import Link from "next/link";
 
 export default function Home() {
+  const unixStart = 1567317600 * 1000; // ms
   return (
     <>
       <Navigation />
@@ -40,7 +41,7 @@ export default function Home() {
             body: "przekleństw, wyzwisk i obelg",
           },
           {
-            head: "1521",
+            head: Math.floor((Date.now() - unixStart) / (1000 * 60 * 60 * 24)),
             body: "dni w tym pierdolniku",
           },
           {
@@ -71,7 +72,7 @@ export default function Home() {
             Z czego się tak śmiejesz? Powiedz. <br /> Wszyscy się pośmiejemy.
           </p>
           <Link
-            href="/"
+            href="/dodaj"
             className="mt-6 flex rounded outline-black outline-offset-4"
           >
             <button
