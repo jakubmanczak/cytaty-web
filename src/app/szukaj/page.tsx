@@ -1,8 +1,9 @@
 "use client";
 import { Navigation } from "@/components/Navigation";
 import { Quote } from "@/components/Quote";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconSearch } from "@/icons/Search";
+import { quote } from "@/types/quote";
 
 const exampleDataSet = [
   {
@@ -66,10 +67,20 @@ const exampleDataSet = [
   },
 ];
 
-const resolvedData = exampleDataSet;
+const resolvedData: quote[] = [];
 
 export default function Search() {
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const [resolved, setResolved] = useState<quote[]>([]);
+  useEffect(() => {
+    fetch("/api/quote/all")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setResolved(json);
+      });
+  });
   return (
     <>
       <Navigation />
@@ -97,13 +108,6 @@ export default function Search() {
               <IconSearch />
             </button>
           </div>
-          {/* <div className="w-full flex flex-row">
-            <p>aa</p>
-          </div> */}
-          <p className="text-slate-400 text-center">
-            (Aktualnie niefunkcjonalne z powodu braku backendu - szukanie pokaże
-            brak wyników.)
-          </p>
         </section>
         <hr className="border-slate-300" />
         {/* RESULTS SECTION */}
@@ -114,10 +118,10 @@ export default function Search() {
             </p>
           ) : (
             <p className="text-slate-500 text-center mt-1">
-              Znaleziono {resolvedData.length} cytat
-              {resolvedData.length == 1
+              Znaleziono {resolved.length} cytat
+              {resolved.length == 1
                 ? ""
-                : [2, 3, 4].includes(resolvedData.length)
+                : [2, 3, 4].includes(resolved.length)
                 ? "y"
                 : "ów"}
               .
@@ -125,19 +129,9 @@ export default function Search() {
           )}
           {/*  */}
           <div className="flex flex-col gap-4 mt-2">
-            {resolvedData
-              ? resolvedData.map((quote) => {
-                  return (
-                    <Quote
-                      quote={{
-                        quoteid: quote.quoteid,
-                        context: quote.context,
-                        timestamp: quote.timestamp,
-                        lines: quote.lines,
-                      }}
-                      key={quote.quoteid}
-                    />
-                  );
+            {resolved
+              ? resolved.map((quote) => {
+                  return <Quote quote={quote} key={quote.quoteid} />;
                 })
               : ""}
           </div>

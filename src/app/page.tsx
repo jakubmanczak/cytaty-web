@@ -1,39 +1,43 @@
+"use client";
 import { Navigation } from "@/components/Navigation";
 import { Quote } from "@/components/Quote";
+import { quote } from "@/types/quote";
 import Link from "next/link";
+import { resolve } from "path";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [quoteCount, setQuoteCount] = useState<number>(0);
   const unixStart = 1567317600 * 1000; // ms
+  const [resolved, setResolved] = useState<quote | null>(null);
+  useEffect(() => {
+    fetch("/api/quote/count")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setQuoteCount(json["count"]);
+      });
+    fetch("/api/quote/random")
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setResolved(json);
+      });
+  }, []);
   return (
     <>
       <Navigation />
       <div className="max-w-4xl mx-auto py-4">
-        <h2 className="font-bold text-xl py-4">Cytat dnia</h2>
-        <Quote
-          quote={{
-            lines: [
-              {
-                lineid: "asdasd",
-                author: "Krzysztof Łuczka",
-                content: "Ile potrzeba Mańczaków...",
-              },
-              {
-                lineid: "rgdfsgs",
-                author: "Jakub Mańczak",
-                content: "Jak najmniej!",
-              },
-            ],
-            context: "",
-            quoteid: "fsyughqw489etgyaerhugfiswe4y8tgr",
-            timestamp: 1698178080,
-          }}
-        />
+        <h2 className="font-bold text-xl py-4">Losowy cytat</h2>
+        <Quote quote={resolved} />
       </div>
       <h2 className="max-w-4xl mx-auto font-bold text-xl py-2">Statystyki</h2>
       <div className="max-w-4xl mx-auto py-4 flex flex-col md:flex-row flex-wrap gap-4">
         {[
           {
-            head: "2137",
+            head: quoteCount,
             body: "cytatów w bazie",
           },
           {
@@ -58,7 +62,7 @@ export default function Home() {
               className="bg-slate-50 p-4 text-center md:rounded shadow flex-1 min-w-[30%]"
               key={el.body}
             >
-              <p className="font-extrabold text-4xl">{el.head}</p>
+              <p className="font-extrabold text-4xl">{el.head || "~"}</p>
               <p>{el.body}</p>
             </div>
           );

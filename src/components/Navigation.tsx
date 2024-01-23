@@ -3,16 +3,18 @@ import Link from "next/link";
 import Image from "next/image";
 import { IconSearch } from "@/icons/Search";
 import { IconUser } from "@/icons/User";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IconChevronDown } from "@/icons/ChevronDown";
 import { IconLayout } from "@/icons/Layout";
 import { IconLogOut } from "@/icons/LogOut";
 import { IconSliders } from "@/icons/Sliders";
 import { IconChevronUp } from "@/icons/ChevronUp";
+import { UserContext } from "@/contexts/UserContext";
 
 const Navigation = () => {
+  const userctx = useContext(UserContext);
   const iconsize: number = 24;
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  // const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [userPanelOpen, setUserPanelOpen] = useState<boolean>(false);
   return (
     <nav className="flex flex-row shadow-md bg-slate-50">
@@ -36,7 +38,7 @@ const Navigation = () => {
         <IconSearch />
         <p className="hidden lg:block">Wyszukiwanie szczegółowe</p>
       </Link>
-      {loggedIn ? (
+      {userctx?.user.loggedin ? (
         <>
           <div className="relative">
             <button
@@ -73,7 +75,7 @@ const Navigation = () => {
                 <button
                   className="flex flex-row items-center w-full py-3 pl-6 gap-6 border-slate-200 border-t hover:bg-slate-200"
                   onClick={() => {
-                    setLoggedIn(false);
+                    userctx.setUser({ loggedin: false });
                     setUserPanelOpen(false);
                   }}
                 >
@@ -88,18 +90,18 @@ const Navigation = () => {
         </>
       ) : (
         <>
-          <button
-            // href="/zaloguj-sie"
-            onClick={() => {
-              setLoggedIn(true);
-            }}
+          <Link
+            href="/zaloguj-sie"
+            // onClick={() => {
+            //   userctx?.setUser({ ...userctx.user, loggedin: true });
+            // }}
             className="
               px-6 flex flex-row items-center gap-2 justify-center border-slate-200 border-l hover:bg-slate-200
             "
           >
             <IconUser />
             <p className="hidden lg:block">Zaloguj się</p>
-          </button>
+          </Link>
         </>
       )}
     </nav>

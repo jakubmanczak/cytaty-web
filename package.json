@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "jsonwebtoken": "^9.0.2",
     "next": "^14.0.4",
     "react": "latest",
     "react-dom": "latest",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.6"
+    "sqlite3": "^5.1.6",
+    "ulid": "^2.3.0"
   },
   "devDependencies": {
     "@types/node": "latest",
