@@ -3,14 +3,14 @@ import { Navigation } from "@/components/Navigation";
 import { Quote } from "@/components/Quote";
 import { quote } from "@/types/quote";
 import Link from "next/link";
-import { resolve } from "path";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [quoteCount, setQuoteCount] = useState<number>(0);
+  const [quoteCount, setQuoteCount] = useState<number | null>(null);
   const unixStart = 1567317600 * 1000; // ms
   const [resolved, setResolved] = useState<quote | null>(null);
   useEffect(() => {
+    // let isRandomQuoteFetchSuccessful = false;
     fetch("/api/quote/count")
       .then((res) => {
         return res.json();
@@ -18,13 +18,14 @@ export default function Home() {
       .then((json) => {
         setQuoteCount(json["count"]);
       });
-    fetch("/api/quote/random")
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setResolved(json);
-      });
+    // fetch("/api/quote/random")
+    //   .then((res) => {
+    //     if (res.ok) isRandomQuoteFetchSuccessful = true;
+    //     return res.ok ? res.json() : JSON.parse("{}");
+    //   })
+    //   .then((json) => {
+    //     setResolved(isRandomQuoteFetchSuccessful ? json : null);
+    //   });
   }, []);
   return (
     <>
@@ -62,7 +63,11 @@ export default function Home() {
               className="bg-slate-50 p-4 text-center md:rounded shadow flex-1 min-w-[30%]"
               key={el.body}
             >
-              <p className="font-extrabold text-4xl">{el.head || "~"}</p>
+              {el.head !== null ? (
+                <p className="font-extrabold text-4xl">{el.head}</p>
+              ) : (
+                <div className="mx-auto h-10 bg-slate-200 rounded animate-pulse" />
+              )}
               <p>{el.body}</p>
             </div>
           );

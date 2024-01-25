@@ -51,13 +51,13 @@ const Quote = (props: { quote: quote | null }) => {
     return (
       <article className="w-full bg-white md:rounded shadow">
         <div className="flex flex-col gap-2 p-4">
-          <div className="block w-3/4 h-5 bg-slate-200 rounded" />
-          <div className="block w-3/5 h-5 bg-slate-200 rounded" />
+          <div className="block w-3/4 h-5 bg-slate-200 rounded animate-pulse" />
+          <div className="block w-3/5 h-5 bg-slate-200 rounded animate-pulse" />
         </div>
         <hr className="border-slate-300" />
         <div className="flex flex-row justify-between bg-slate-100 rounded-bl rounded-br px-4 py-2">
-          <div className="block w-2/5 h-5 bg-white rounded" />
-          <div className="block w-1/5 h-5 bg-white rounded" />
+          <div className="block w-2/5 h-5 bg-white rounded animate-pulse" />
+          <div className="block w-1/5 h-5 bg-white rounded animate-pulse" />
         </div>
       </article>
     );

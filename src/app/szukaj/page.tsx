@@ -5,80 +5,18 @@ import { useEffect, useState } from "react";
 import { IconSearch } from "@/icons/Search";
 import { quote } from "@/types/quote";
 
-const exampleDataSet = [
-  {
-    quoteid: "01HBY5X0KZV4AQWXA7XFX84Y3A",
-    context: "data na plakacie z PRL-u",
-    timestamp: 1696324197,
-    lines: [
-      {
-        lineid: "asdasdfasdfa",
-        content: "8 marca? W sumie nie wiem co to za data...",
-        author: "Mateusz Dobrzyński",
-      },
-      {
-        lineid: "ehtdngw5yresgdf",
-        content:
-          "Dzień kobiet... ale podobno w ZSK macie prawo tego nie wiedzieć.",
-        author: "Sławomir Wartacz",
-      },
-    ],
-  },
-  {
-    quoteid: "01HBY66QS7VP7SY0RK5A0K52B4",
-    context: "o tatuażu Kacpra Włosińskiego",
-    timestamp: 1696412277,
-    lines: [
-      {
-        lineid: "6uhdfxfgwe",
-        content: "A ty znowu jak brudnopis wyglądasz.",
-        author: "Alicja Gizelska",
-      },
-    ],
-  },
-  {
-    quoteid: "01HBY8EXFV0T62N2EB8X7975TD",
-    context: null,
-    timestamp: 1695282767,
-    lines: [
-      {
-        lineid: "asfgafgsdfg",
-        content: "Franek bez bolca dostaje pierdolca.",
-        author: "Aleksander Skubała",
-      },
-      {
-        lineid: "dsfgheuyhdgdgf",
-        content: "Jak się Olka nie bije to mu wątroba gnije.",
-        author: "Franciszek Niemczewski",
-      },
-    ],
-  },
-  {
-    quoteid: "01HBY8QBWTBPC6FN5DJ0JG8AXT",
-    context: null,
-    timestamp: 1695200627,
-    lines: [
-      {
-        lineid: "sdfgsdfgsdfg",
-        content: "A gdzie tu jest sex?",
-        author: "Ryszard Pyssa",
-      },
-    ],
-  },
-];
-
-const resolvedData: quote[] = [];
-
 export default function Search() {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [resolved, setResolved] = useState<quote[]>([]);
+  const [resolved, setResolved] = useState<quote[] | null>(null);
   useEffect(() => {
+    let resOk = false;
     fetch("/api/quote/all")
       .then((res) => {
-        return res.json();
+        if (res.ok) resOk = true;
+        return res.ok ? res.json() : "";
       })
       .then((json) => {
-        setResolved(json);
+        if (resOk) setResolved(json);
       });
   });
   return (
@@ -112,7 +50,7 @@ export default function Search() {
         <hr className="border-slate-300" />
         {/* RESULTS SECTION */}
         <section>
-          {searchQuery ? (
+          {/* {searchQuery ? (
             <p className="text-2xl font-bold text-slate-500 text-center mt-8">
               Nie znaleziono cytatów.
             </p>
@@ -126,7 +64,7 @@ export default function Search() {
                 : "ów"}
               .
             </p>
-          )}
+          )} */}
           {/*  */}
           <div className="flex flex-col gap-4 mt-2">
             {resolved

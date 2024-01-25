@@ -48,5 +48,7 @@ export async function GET(req: Request) {
       });
     }
   });
-  return Response.json(quotes);
+  return quotes.length
+    ? Response.json(quotes)
+    : Response.json(null, { status: 500 });
 }
